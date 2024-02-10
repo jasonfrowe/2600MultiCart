@@ -67,5 +67,6 @@ If everything worked you should have a file called `pico_rom.uf2` in the build f
 ### In Development
 
 24. Wifi with a Pico-W and MQTT to transfer ROMs.
+25. Making a case.
 
 
