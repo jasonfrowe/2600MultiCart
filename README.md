@@ -1,4 +1,7 @@
 # 2600MultiCart
+
+**Disclaimer: Codes, PCB designs are provided for entertainment use only.  You assume all risk of assembly and usage.  There is the potential to damage your console if mistakes are made.**
+
 Multi-Cartridge for the Atari 2600+
 
 Using a Raspberry Pi PICO to emulate a 28C256 32KB EEPROM which is then interfaced to an Atari 2600 cartridge card.
