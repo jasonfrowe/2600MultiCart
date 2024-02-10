@@ -24,6 +24,48 @@ A helper script 'make_romheaders.py' is provided that will read in ROMS from the
 
 ### Build Software
 
-1. Place  your dumped ROMs into the roms folder
-2. 
+1. Place at least 16 dumped ROMs into the roms folder. These files should be .bin or .a26 format.
+   - only 2K, 4K, 8K (F8), 16K (F6) and 32K (F4) ROMs are currently supported at the moment.
+2. Run the `make_romheaders.py` script to generate `roms_XX.h` files
+   - the first 16 ROMs in the folder will be used.  If you want to select different roms you need to line 7 of `make_romheaders.py` to reflect your choices
+3. Make sure you have the C/C++ PICO SDK setup and the `PICO_SDK_PATH` environment variable points to your install location
+4. `cd build`
+5. `cmake .. -DPICO_BOARD=pico_w -DWIFI_SSID="monarch" -DWIFI_PASSWORD="DoesNotWork"`
+6. `make`
+
+If everything worked you should have a file called `pico_rom.uf2` in the build folder.
+
+7. Hold down the `BOOTSEL` button and attach your Raspberry Pi Pico to your computer with a micro-usb cable.  Release the `BOOTSEL` button.
+8. Copy `pico_rom.uf2` to the `RPI-RP2` folder.  If successful, the Pico will disconnect from your computer and start running the code.  The on-board LED will light up if everything is working.
+
+### Order the board.
+
+9. Create the board with a service such as PCBWay.  The board has dimensions 96.52 x 71.12 mm.  Two-layers and 1.6mm thickness is fine.
+10. I changed the Solder mask to Red, but the default Green is fine.
+11. Select Yes for Edge-connector.
+12. If you don't want to spend much money, the HASL lead or HASL lead-free are okay.  ENIG is also a good choice, although more expensive.  
+13. I also included a Bevel of 30 degrees
+14. You can now Save to Cart
+15. Upload the GerberFiles.  For convience a ZIP file can be found in the `gerbers` folder.
+16. Wait for Review, make your payment and wait.
+17. You may encounter 2 engineering questions.
+    - removal of some material for the Bevel (this is okay)
+    - removal of solder mask around the edge-connector (this is okay)
+18. Wait for your board.
+
+### Build the board.
+
+19. Get your soldering iron and attach the Pico, sockets, diode and resistors.  Place these components on the side marked `PicoMultiCart`.
+20. Now you have a choice.  The dip-switch and reset-button can be placed facing either side of the PCB.  I decided to have these components on the side that faces you when inserting the cart.
+
+### Play some games
+
+21. Line up the cart with the pins on the 2600+ and insert the MultiCart.  Make sure the orientation is correct.  The side with the Pico and ICs should face away from you if you are in front of your console.
+22. Turn on the Atari-2600+.  A game should load
+23. To change games, simply change the dip-switches, then hit the `reset` button.  A new game should load.
+
+### In Development
+
+24. Wifi with a Pico-W and MQTT to transfer ROMs.
+
 
