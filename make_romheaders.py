@@ -4,7 +4,7 @@ import os
 import numpy as np
 
 # Change this array to select which ROMS you want
-romlist = [15, 13, 52, 27, 56, 50, 57, 35, 30, 20, 67, 14, 43, 40, 6, 60]
+romlist = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
 romdir = "roms"
 files = os.listdir(romdir)
