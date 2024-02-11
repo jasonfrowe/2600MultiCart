@@ -54,29 +54,88 @@ void run_dns_lookup(MQTT_CLIENT_T *state) {
 
 u32_t data_in = 0;
 
-u8_t buffer[1025];
-u8_t data_len = 0;
+u8_t buffer[65537];
+u32_t data_len = 0;
 
 static void mqtt_pub_start_cb(void *arg, const char *topic, u32_t tot_len) {
     DEBUG_printf("mqtt_pub_start_cb: topic %s\n", topic);
 
-    if (tot_len > 1024) {
-        DEBUG_printf("Message length exceeds buffer size, discarding");
+    if (tot_len > 65536) {
+        DEBUG_printf("Message length exceeds buffer size, discarding %d.\n", tot_len);
     } else {
+        DEBUG_printf("Message received of length %d.\n", tot_len);
         data_in = tot_len;
         data_len = 0;
     }
 }
 
+
 static void mqtt_pub_data_cb(void *arg, const u8_t *data, u16_t len, u8_t flags) {
     if (data_in > 0) {
         data_in -= len;
         memcpy(&buffer[data_len], data, len);
+        // DEBUG_printf("Message part: %d %s\n",len, data);
         data_len += len;
 
         if (data_in == 0) {
             buffer[data_len] = 0;
             DEBUG_printf("Message received: %s\n", &buffer);
+            DEBUG_printf("Message length %d %d.\n", data_len, len);
+
+            uint8_t val = 0;
+            uint8_t byte = 0;
+
+            int i = 0;
+            int j = 0;
+            uint8_t rom_wifi[32768] = { 0 }; // Will be set by setup_cart
+
+            while (i<data_len){
+                val = 0;
+
+                byte = buffer[i];
+                if (byte >= '0' && byte <= '9') byte = byte - '0';
+                else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
+                else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;    
+                // shift 4 to make space for new digit, and add the 4 bits of the new digit 
+                val = (val << 4) | (byte & 0xF);
+
+                byte = buffer[i+1];
+                if (byte >= '0' && byte <= '9') byte = byte - '0';
+                else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
+                else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;    
+                // shift 4 to make space for new digit, and add the 4 bits of the new digit 
+                val = (val << 4) | (byte & 0xF);
+
+                rom_wifi[j] = val;
+
+                // DEBUG_printf("Byte %d.\n", val);
+
+                i+=2;
+                j+=1;
+
+            }
+
+            romsize = j;
+            for (int ii = 0; ii < romsize; ii++){
+                rom_contents[ii] = rom_wifi[ii];
+            }
+
+            if (romsize == 4096){
+                bankswitch = 0; // No bankswitching
+                fpBankSwitching = &BankSwitching_none;
+            } else if (romsize == 8192){
+                bankswitch = 1; // F8 bankswitching
+                fpBankSwitching = &BankSwitching_F8;
+            } else if (romsize == 16384){
+                bankswitch = 2; // F6 bankswitching
+                fpBankSwitching = &BankSwitching_F6;
+            } else if (romsize == 32768){
+                bankswitch = 3; // F4 bankswitching
+                fpBankSwitching = &BankSwitching_F4;
+            }
+
+            // DEBUG_printf("New rom %d.\n", romsize);
+
         }
     }
 }
