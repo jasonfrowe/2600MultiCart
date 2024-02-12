@@ -20,10 +20,9 @@
 #include "lwip/apps/mqtt.h"
 #include "lwip/apps/mqtt_priv.h"
 
-#include "mqtt_setup.h" // functions for MQTT communication 
-
 #include "cart_setup.h" // variables and functions needed for cartrdige ROM
 
+#include "mqtt_setup.h" // functions for MQTT communication 
 
 void setup_gpio(); // uses pin defintions and sets address and data bus
 int get_requested_address(); // get address from address bus
@@ -94,7 +93,7 @@ int main() {
     // *** Set up WIFI services *** ///
 
     
-    char wifi_pass[] = "YourWIFIPassword";
+    char wifi_pass[] = "YourPassWordHere"
 
     printf(WIFI_SSID);
     printf("\n");
