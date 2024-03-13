@@ -33,7 +33,7 @@ A helper script 'make_romheaders.py' is provided that will read in ROMS from the
    - the first 16 ROMs in the folder will be used.  If you want to select different roms you need to line 7 of `make_romheaders.py` to reflect your choices
 3. Make sure you have the C/C++ PICO SDK setup and the `PICO_SDK_PATH` environment variable points to your install location
 4. `cd build`
-5. `cmake .. -DPICO_BOARD=pico_w -DWIFI_SSID="YourWIFI" -DWIFI_PASSWORD="DoesNotWork"`
+5. `cmake .. -DPICO_BOARD=pico`
 6. `make picorom` (note that just running make will attempt to also create the unstable WIFI rom) 
    
 If everything worked you should have a file called `pico_rom.uf2` in the build folder.  
