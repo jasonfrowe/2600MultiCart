@@ -60,6 +60,7 @@ If everything worked you should have a file called `pico_rom.uf2` in the build f
 
 19. Get your soldering iron and attach the Pico, sockets, diode and resistors.  Place these components on the side marked `PicoMultiCart`.
 20. Now you have a choice.  The dip-switch and reset-button can be placed facing either side of the PCB.  I decided to have these components on the side that faces you when inserting the cart.
+21. Note: The resistor at R3 connects to the LED in the latest revision.  Neither of these need to be populated at the moment.  Once a cart is ready, the led will be used to indicate power.
 
 ### Play some games
 
