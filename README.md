@@ -34,9 +34,9 @@ A helper script 'make_romheaders.py' is provided that will read in ROMS from the
 3. Make sure you have the C/C++ PICO SDK setup and the `PICO_SDK_PATH` environment variable points to your install location
 4. `cd build`
 5. `cmake .. -DPICO_BOARD=pico_w -DWIFI_SSID="YourWIFI" -DWIFI_PASSWORD="DoesNotWork"`
-6. `make`
-
-If everything worked you should have a file called `pico_rom.uf2` in the build folder.
+6. `make picorom` (note that just running make will attempt to also create the unstable WIFI rom) 
+   
+If everything worked you should have a file called `pico_rom.uf2` in the build folder.  
 
 7. Hold down the `BOOTSEL` button and attach your Raspberry Pi Pico to your computer with a micro-usb cable.  Release the `BOOTSEL` button.
 8. Copy `pico_rom.uf2` to the `RPI-RP2` folder.  If successful, the Pico will disconnect from your computer and start running the code.  The on-board LED will light up if everything is working.
