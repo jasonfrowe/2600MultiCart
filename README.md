@@ -62,16 +62,18 @@ If everything worked you should have a file called `pico_rom.uf2` in the build f
 20. Now you have a choice.  The dip-switch and reset-button can be placed facing either side of the PCB.  I decided to have these components on the side that faces you when inserting the cart.
 21. Note: The resistor at R3 connects to the LED in the latest revision.  Neither of these need to be populated at the moment.  Once a cart is ready, the led will be used to indicate power.
 
+### Print a case
+
+22. Use your 3D printer to print the included case. Note that supports and some sanding may be rquired.
+
 ### Play some games
 
-21. Line up the cart with the pins on the 2600+ and insert the MultiCart.  Make sure the orientation is correct.  The side with the Pico and ICs should face away from you if you are in front of your console.
-22. Turn on the Atari-2600+.  A game should load
-23. To change games, simply change the dip-switches, then hit the `reset` button.  A new game should load.
+23. Line up the cart with the pins on the 2600+ and insert the MultiCart.  Make sure the orientation is correct.  The side with the Pico and ICs should face away from you if you are in front of your console.
+24. Turn on the Atari-2600+.  A game should load
+25. To change games, simply change the dip-switches, then hit the `reset` button.  A new game should load.
 
 ### In Development
 
-24. Wifi with a Pico-W and MQTT to transfer ROMs.
+26. Wifi with a Pico-W and MQTT to transfer ROMs.
    - current WIFI build is unstable.  ROM timing needs additional work.
-26. Making a case.
-
-
+27. Making a better case
